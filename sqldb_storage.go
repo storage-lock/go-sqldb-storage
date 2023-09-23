@@ -22,9 +22,32 @@ const (
 	DriverNameSqlServer  = "sqlserver"
 )
 
-// NewStorageBySqlDb 根据sql.DB创建对应的Storage
-func NewStorageBySqlDb(db *sql.DB) (storage.Storage, error) {
+// NewStorage 根据sql.DB创建对应的Storage
+func NewStorage(db *sql.DB) (storage.Storage, error) {
 	connectionManager := storage.NewFixedSqlDBConnectionManager(db)
+	driverName, err := GetDriverNameForSqlDb(db)
+	if err != nil {
+		return nil, err
+	}
+	return NewStorageByDriverName(driverName, connectionManager)
+}
+
+// NewStorageByConnectionManager 从sql.DB的连接管理器中创建Storage
+func NewStorageByConnectionManager(ctx context.Context, connectionManager storage.ConnectionManager[*sql.DB]) (sqlDbStorage storage.Storage, returnError error) {
+
+	// 从连接池中获取sql.DB
+	db, err := connectionManager.Take(ctx)
+	if err != nil {
+		return nil, err
+	}
+	defer func(connectionManager storage.ConnectionManager[*sql.DB], ctx context.Context, connection *sql.DB) {
+		err := connectionManager.Return(ctx, connection)
+		if err != nil && returnError == nil {
+			returnError = err
+		}
+	}(connectionManager, ctx, db)
+
+	// 释放掉
 	driverName, err := GetDriverNameForSqlDb(db)
 	if err != nil {
 		return nil, err
