@@ -23,7 +23,8 @@ const (
 )
 
 // NewStorageBySqlDb 根据sql.DB创建对应的Storage
-func NewStorageBySqlDb(db *sql.DB, connectionManager storage.ConnectionManager[*sql.DB]) (storage.Storage, error) {
+func NewStorageBySqlDb(db *sql.DB) (storage.Storage, error) {
+	connectionManager := storage.NewFixedSqlDBConnectionManager(db)
 	driverName, err := GetDriverNameForSqlDb(db)
 	if err != nil {
 		return nil, err
@@ -35,13 +36,13 @@ func NewStorageBySqlDb(db *sql.DB, connectionManager storage.ConnectionManager[*
 func NewStorageByDriverName(driverName string, connectionManager storage.ConnectionManager[*sql.DB]) (storage.Storage, error) {
 	switch driverName {
 	case DriverNameMysql:
-		options := mysql_storage.NewMySQLStorageOptions().SetConnectionProvider(connectionManager)
-		return mysql_storage.NewMySQLStorage(context.Background(), options)
+		options := mysql_storage.NewMysqlStorageOptions().SetConnectionManager(connectionManager)
+		return mysql_storage.NewMysqlStorage(context.Background(), options)
 	case DriverNamePostgresql:
-		options := postgresql_storage.NewPostgreSQLStorageOptions().SetConnectionManager(connectionManager)
-		return postgresql_storage.NewPostgreSQLStorage(context.Background(), options)
+		options := postgresql_storage.NewPostgresqlStorageOptions().SetConnectionManager(connectionManager)
+		return postgresql_storage.NewPostgresqlStorage(context.Background(), options)
 	case DriverNameSqlServer:
-		options := sqlserver_storage.NewSqlServerStorageOptions().SetConnectionManage(connectionManager)
+		options := sqlserver_storage.NewSqlServerStorageOptions().SetConnectionManager(connectionManager)
 		return sqlserver_storage.NewSqlServerStorage(context.Background(), options)
 	default:
 		return nil, fmt.Errorf("do not suppoort driver name %s", driverName)
