@@ -8,8 +8,10 @@ import (
 	"github.com/go-sql-driver/mysql"
 	"github.com/lib/pq"
 	_ "github.com/lib/pq"
+	"github.com/mattn/go-sqlite3"
 	mysql_storage "github.com/storage-lock/go-mysql-storage"
 	postgresql_storage "github.com/storage-lock/go-postgresql-storage"
+	sqlite3_storage "github.com/storage-lock/go-sqlite3-storage"
 	sqlserver_storage "github.com/storage-lock/go-sqlserver-storage"
 	"github.com/storage-lock/go-storage"
 	"reflect"
@@ -20,6 +22,7 @@ const (
 	DriverNameMysql      = "mysql"
 	DriverNamePostgresql = "postgres"
 	DriverNameSqlServer  = "sqlserver"
+	DriverNameSqlite3    = "sqlite3"
 )
 
 // NewStorage 根据sql.DB创建对应的Storage
@@ -67,6 +70,9 @@ func NewStorageByDriverName(driverName string, connectionManager storage.Connect
 	case DriverNameSqlServer:
 		options := sqlserver_storage.NewSqlServerStorageOptions().SetConnectionManager(connectionManager)
 		return sqlserver_storage.NewSqlServerStorage(context.Background(), options)
+	case DriverNameSqlite3:
+		options := sqlite3_storage.NewSqlite3StorageOptions().SetConnectionManager(connectionManager)
+		return sqlite3_storage.NewSqlite3Storage(context.Background(), options)
 	default:
 		return nil, fmt.Errorf("do not suppoort driver name %s", driverName)
 	}
@@ -81,6 +87,8 @@ func GetDriverNameForSqlDb(db *sql.DB) (string, error) {
 		return DriverNamePostgresql, nil
 	case *mssql.Driver:
 		return DriverNameSqlServer, nil
+	case *sqlite3.SQLiteDriver:
+		return DriverNameSqlite3, nil
 	default:
 		return "", fmt.Errorf("do not support driver %s", reflect.TypeOf(db.Driver()).Name())
 	}

@@ -20,10 +20,12 @@ require (
 	github.com/golang-infrastructure/go-reflect-utils v0.0.0-20221130143747-965ef2eb09c3 // indirect
 	github.com/golang-sql/civil v0.0.0-20220223132316-b832511892a9 // indirect
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
-	github.com/google/uuid v1.3.1 // indirect
+	github.com/google/uuid v1.4.0 // indirect
+	github.com/mattn/go-sqlite3 v1.14.17 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/storage-lock/go-events v0.0.3 // indirect
 	github.com/storage-lock/go-sql-based-storage v0.0.0-20230903181730-3e91a672a521 // indirect
+	github.com/storage-lock/go-sqlite3-storage v0.0.1 // indirect
 	github.com/storage-lock/go-storage-events v0.0.5 // indirect
 	github.com/storage-lock/go-storage-lock v0.0.5 // indirect
 	github.com/storage-lock/go-utils v0.0.2 // indirect
