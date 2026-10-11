@@ -27,7 +27,22 @@ const (
 
 // NewStorage 根据sql.DB创建对应的Storage
 func NewStorage(db *sql.DB) (storage.Storage, error) {
+	if db == nil {
+		return nil, fmt.Errorf("db can not nil")
+	}
 	connectionManager := storage.NewFixedSqlDBConnectionManager(db)
+	return NewStorageBySqlDb(db, connectionManager)
+}
+
+// NewStorageBySqlDb 根据sql.DB和连接管理器创建对应的Storage
+// 历史上这就是该函数一直对外暴露的名字（go-sqldb-storage/coverage.html、
+// go-sqldb-locks/sqldb_locks_test.go 以及 beego/gorm/xorm/sqlx/sqldb 五个 locks
+// 仓库全部调用此名）；曾有工作区改动把它内联进 NewStorage 导致符号消失，本次恢复为
+// 独立函数，NewStorage 改为委托它实现，行为与原来完全一致（含 nil db 显式报错）。
+func NewStorageBySqlDb(db *sql.DB, connectionManager storage.ConnectionManager[*sql.DB]) (storage.Storage, error) {
+	if db == nil {
+		return nil, fmt.Errorf("db can not nil")
+	}
 	driverName, err := GetDriverNameForSqlDb(db)
 	if err != nil {
 		return nil, err
