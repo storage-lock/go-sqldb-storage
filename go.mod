@@ -10,9 +10,9 @@ require (
 	github.com/mattn/go-sqlite3 v1.14.17
 	github.com/storage-lock/go-mysql-storage v0.0.3-0.20230923200627-de392591593c
 	github.com/storage-lock/go-postgresql-storage v0.0.3-0.20230916184926-6506db239a80
-	github.com/storage-lock/go-sqlite3-storage v0.0.1
+	github.com/storage-lock/go-sqlite3-storage v0.0.2
 	github.com/storage-lock/go-sqlserver-storage v0.0.2-0.20230916183802-f1cfe0b4cf50
-	github.com/storage-lock/go-storage v0.0.2
+	github.com/storage-lock/go-storage v0.0.3
 	github.com/stretchr/testify v1.11.1
 )
 
@@ -26,19 +26,11 @@ require (
 	github.com/golang-sql/sqlexp v0.1.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	github.com/storage-lock/go-events v0.0.3 // indirect
-	github.com/storage-lock/go-sql-based-storage v0.0.0-20230903181730-3e91a672a521 // indirect
-	github.com/storage-lock/go-storage-events v0.0.5 // indirect
-	github.com/storage-lock/go-storage-lock v0.0.5 // indirect
+	github.com/storage-lock/go-events v0.0.4 // indirect
+	github.com/storage-lock/go-sql-based-storage v0.0.2 // indirect
+	github.com/storage-lock/go-storage-events v0.0.6 // indirect
+	github.com/storage-lock/go-storage-lock v0.0.6 // indirect
 	github.com/storage-lock/go-utils v0.0.2 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
-
-replace github.com/storage-lock/go-storage => ../go-storage
-
-replace github.com/storage-lock/go-sql-based-storage => ../go-sql-based-storage
-
-replace github.com/storage-lock/go-sqlite3-storage => ../go-sqlite3-storage
-
-replace github.com/storage-lock/go-storage-lock => ../go-storage-lock
