@@ -8,10 +8,10 @@ require (
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/lib/pq v1.10.9
 	github.com/mattn/go-sqlite3 v1.14.17
-	github.com/storage-lock/go-mysql-storage v0.0.3-0.20230923200627-de392591593c
-	github.com/storage-lock/go-postgresql-storage v0.0.3-0.20230916184926-6506db239a80
+	github.com/storage-lock/go-mysql-storage v0.0.3
+	github.com/storage-lock/go-postgresql-storage v0.0.3
 	github.com/storage-lock/go-sqlite3-storage v0.0.2
-	github.com/storage-lock/go-sqlserver-storage v0.0.2-0.20230916183802-f1cfe0b4cf50
+	github.com/storage-lock/go-sqlserver-storage v0.0.2
 	github.com/storage-lock/go-storage v0.0.3
 	github.com/stretchr/testify v1.11.1
 )
