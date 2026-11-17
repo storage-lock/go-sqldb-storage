@@ -29,7 +29,7 @@ require (
 	github.com/storage-lock/go-events v0.0.5 // indirect
 	github.com/storage-lock/go-sql-based-storage v0.0.2 // indirect
 	github.com/storage-lock/go-storage-events v0.0.6 // indirect
-	github.com/storage-lock/go-storage-lock v0.0.6 // indirect
+	github.com/storage-lock/go-storage-lock v0.1.0 // indirect
 	github.com/storage-lock/go-utils v0.0.2 // indirect
 	golang.org/x/crypto v0.13.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
