@@ -12,7 +12,7 @@ require (
 	github.com/storage-lock/go-postgresql-storage v0.0.3
 	github.com/storage-lock/go-sqlite3-storage v0.0.2
 	github.com/storage-lock/go-sqlserver-storage v0.0.2
-	github.com/storage-lock/go-storage v0.0.3
+	github.com/storage-lock/go-storage v0.1.0
 	github.com/stretchr/testify v1.11.1
 )
 
